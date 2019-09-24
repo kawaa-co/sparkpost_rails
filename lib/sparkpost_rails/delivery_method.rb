@@ -16,7 +16,9 @@ module SparkPostRails
       prepare_recipients_from mail, sparkpost_data
       prepare_recipients_data_from sparkpost_data
 
-      if sparkpost_data.has_key?(:template_id)
+      if sparkpost_data.has_key?(:ab_test_id)
+        @data[:content][:ab_test_id] = sparkpost_data[:ab_test_id]
+      elsif sparkpost_data.has_key?(:template_id)
         prepare_template_content_from sparkpost_data
       else
         prepare_from_address_from mail
